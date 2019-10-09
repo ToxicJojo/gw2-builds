@@ -8,8 +8,11 @@ import api from '@/api'
 export default {
   name: 'App',
   async mounted () {
-    const trait = await api.getTraits(214, 'de')
-    console.log(trait)
+    const traits = await api.getTraits(214, 'de')
+    console.log(traits)
+
+    await this.$store.dispatch("loadTraits", [214])
+    await this.$store.dispatch("loadTraits", [214, 700, 705])
   },
 }
 </script>
