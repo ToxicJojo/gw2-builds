@@ -1,0 +1,4 @@
+{
+  "baseURL": "https://api.guildwars2.com/v2",
+  "defaultLanguage": "en"
+}
