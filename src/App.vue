@@ -13,6 +13,7 @@ import Trait from '@/components/Trait.vue'
 export default {
   name: 'App',
   async mounted () {
+    this.$store.dispatch('loadSpecializations', [1])
   },
   components: {
     Trait,

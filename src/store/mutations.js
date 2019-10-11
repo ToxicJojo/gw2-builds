@@ -9,6 +9,14 @@ const mutations = {
       Vue.set(state.traits, trait.id, trait)
     })
   },
+  setSpecializations (state, specializations) {
+    state.specializations = specializations
+  },
+  addSpecializations (state, specializations) {
+    specializations.forEach((specialization) => {
+      Vue.set(state.specializations, specialization.id, specialization)
+    })
+  },
 }
 
 export default mutations

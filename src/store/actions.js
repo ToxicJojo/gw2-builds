@@ -13,6 +13,18 @@ const actions = {
       commit('addTraits', traits)
     }
   },
+  async loadSpecializations ({ state, commit }, ids) {
+    // We only need to load ids that are not already loaded.
+    const notLoadedIds = ids.filter((id) => {
+      return state.specializations[id] === undefined
+    })
+
+    // Don't hit the api if there are no new traits to load.
+    if (notLoadedIds.length >= 1) {
+      const specializations = await api.getSpecializations(notLoadedIds)
+      commit('addSpecializations', specializations)
+    }
+  },
 }
 
 export default actions
