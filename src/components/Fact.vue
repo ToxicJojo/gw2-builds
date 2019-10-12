@@ -14,6 +14,7 @@ import ComboFinisher from '@/components/facts/ComboFinisher.vue'
 import Damage from '@/components/facts/Damage.vue'
 import Distance from '@/components/facts/Distance.vue'
 import Number from '@/components/facts/Number.vue'
+import NoData from '@/components/facts/NoData.vue'
 import Percent from '@/components/facts/Percent.vue'
 import Radius from '@/components/facts/Radius.vue'
 import Range from '@/components/facts/Range.vue'
@@ -32,6 +33,7 @@ export default {
     Damage,
     Distance,
     Number,
+    NoData,
     Percent,
     Radius,
     Range,

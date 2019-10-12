@@ -1,7 +1,7 @@
 <template lang='pug'>
   .trait
     template(v-if='trait')
-      img(:src='trait.icon' @mouseout='showTooltip = false' @mouseenter='showTooltip = true')
+      img(:src='trait.icon' @mouseout='showTooltip = false' @mouseenter='showTooltip = true' :class='{ selected: selected}')
       ToolTip(v-if='showTooltip' :value='trait' :isFloating='true')
 </template>
 
@@ -25,7 +25,7 @@ export default {
       return this.$store.state.traits[this.id]
     },
   },
-  props: ['id'],
+  props: ['id', 'selected'],
   components: {
     ToolTip,
   },
@@ -36,12 +36,13 @@ export default {
 
 .trait {
   position: relative;
-  width: 64px;
-  height: 64px;
+  width: 38px;
+  height: 38px;
+  margin: 2px;
 }
 
 img {
-  opacity: .5;
+  opacity: .65;
   padding-right: 6px;
   padding-bottom: 6px;
   width: 100%;
@@ -49,6 +50,10 @@ img {
 
   &:hover {
     opacity: 1;
+ }
+
+ &.selected {
+   opacity: 1;
  }
 }
 

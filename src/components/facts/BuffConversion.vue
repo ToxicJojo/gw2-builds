@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'Buff Conversion',
+  name: 'BuffConversion',
   props: ['fact'],
 }
 </script>
