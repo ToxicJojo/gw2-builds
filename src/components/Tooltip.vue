@@ -40,7 +40,8 @@ export default {
 .tooltip {
   display: flex;
   flex-direction: column;
-  background-color: rgba(0, 0, 0, .2);
+  background-color: rgba(0, 0, 0, .8);
+  color: rgba(255, 255, 255, .6);
   padding: 8px;
 
   &.floating {

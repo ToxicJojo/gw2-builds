@@ -1,14 +1,14 @@
 <template lang='pug'>
   div.app
     Trait(:id='214')
-    Trait(:id='700')
-    Trait(:id='706')
-    Trait(:id='710')
-    Trait(:id='2168')
+    Specialization(:id='1')
+    Specialization(:id='10')
+    Specialization(:id='23')
 </template>
 
 <script>
 import Trait from '@/components/Trait.vue'
+import Specialization from '@/components/Specialization.vue'
 
 export default {
   name: 'App',
@@ -17,10 +17,15 @@ export default {
   },
   components: {
     Trait,
+    Specialization,
   },
 }
 </script>
 
 <style lang='scss'>
+
+* {
+  box-sizing: border-box;
+}
 
 </style>
