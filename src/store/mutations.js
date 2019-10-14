@@ -17,6 +17,14 @@ const mutations = {
       Vue.set(state.specializations, specialization.id, specialization)
     })
   },
+  setProfessions (state, professions) {
+    state.professions = professions
+  },
+  addProfessions (state, professions) {
+    professions.forEach((profession) => {
+      Vue.set(state.professions, profession.id, profession)
+    })
+  },
 }
 
 export default mutations

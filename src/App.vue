@@ -13,7 +13,7 @@ import Specialization from '@/components/Specialization.vue'
 export default {
   name: 'App',
   async mounted () {
-    this.$store.dispatch('loadSpecializations', [1])
+    this.$store.dispatch('loadProfessions', ['Elementalist'])
   },
   components: {
     Trait,
