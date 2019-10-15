@@ -47,6 +47,8 @@ export default {
       this.isLoadingProfession = true
       await this.$store.dispatch('loadProfessions', [this.professionId])
       await this.$store.dispatch('loadSpecializations', this.profession.specializations)
+      // TODO refactor this
+      await this.$store.dispatch('loadSkills', this.profession.skills.filter((skill) => skill.type === 'Utility' || skill.type === 'Heal' || skill.type === 'Elite').map((skill) => skill.id))
       this.isLoadingProfession = false
     },
   },

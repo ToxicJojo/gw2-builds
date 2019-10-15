@@ -25,6 +25,14 @@ const mutations = {
       Vue.set(state.professions, profession.id, profession)
     })
   },
+  setSkills (state, skills) {
+    state.skills = skills
+  },
+  addSkills (state, skills) {
+    skills.forEach((skill) => {
+      Vue.set(state.skills, skill.id, skill)
+    })
+  },
 }
 
 export default mutations
