@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'Combo Field',
+  name: 'ComboField',
   props: ['fact'],
 }
 </script>
