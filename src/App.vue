@@ -1,17 +1,12 @@
 <template lang='pug'>
   div.app
-    Skill(id='5516')
-    Skill(id='44612')
-    Skill(id='5534')
-    select(v-model='currentProfession')
-      option(v-for='profession in professions' :value='profession')  {{ profession }}
-
-    BuildEditor(:professionId='currentProfession')
+    BuildManager
 
 </template>
 
 <script>
 import BuildEditor from '@/components/BuildEditor.vue'
+import BuildManager from '@/components/BuildManager.vue'
 import Skill from '@/components/Skill.vue'
 import professions from '@/data/professions.json'
 
@@ -25,6 +20,7 @@ export default {
   },
   components: {
     BuildEditor,
+    BuildManager,
     Skill,
   },
 }

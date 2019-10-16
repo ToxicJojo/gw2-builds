@@ -26,7 +26,7 @@ export default {
       isLoadingProfession: false,
       build: {
         skills: {
-          healSkill: 5516,
+          healSkill: 0,
           utilityOne: 0,
           utilityTwo: 0,
           utilityThree: 0,
@@ -109,6 +109,12 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+
+.build-editor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .skill-row {
   display: flex;
