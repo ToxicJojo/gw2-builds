@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'Attribute Adjust',
+  name: 'Damage',
   props: ['fact'],
 }
 </script>

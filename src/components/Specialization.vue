@@ -5,15 +5,15 @@
       .specialization-column
         Trait(:id='specialization.minor_traits[0]' selected='true')
       .specialization-column
-        Trait(v-for='traitId in tierOneTraits' :id='traitId' :selected='selectedTraits.tierOne === traitId' @click.native='selectTrait(traitId, 1)')
+        Trait(v-for='traitId in tierOneTraits' :id='traitId' :selected='value.tierOne === traitId' @click.native='selectTrait(traitId, 1)')
       .specialization-column
         Trait(:id='specialization.minor_traits[1]' selected='true')
       .specialization-column
-        Trait(v-for='traitId in tierTwoTraits' :id='traitId' :selected='selectedTraits.tierTwo === traitId' @click.native='selectTrait(traitId, 2)')
+        Trait(v-for='traitId in tierTwoTraits' :id='traitId' :selected='value.tierTwo === traitId' @click.native='selectTrait(traitId, 2)')
       .specialization-column
         Trait(:id='specialization.minor_traits[2]' selected='true')
       .specialization-column
-        Trait(v-for='traitId in tierThreeTraits' :id='traitId' :selected='selectedTraits.tierThree === traitId' @click.native='selectTrait(traitId, 3)')
+        Trait(v-for='traitId in tierThreeTraits' :id='traitId' :selected='value.tierThree === traitId' @click.native='selectTrait(traitId, 3)')
 
 </template>
 
@@ -32,7 +32,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('loadSpecializations', [this.id])
+    this.loadSpecialization()
   },
   computed: {
     specialization () {
@@ -51,19 +51,31 @@ export default {
   },
   methods: {
     selectTrait (id, tier) {
+      let newValue = JSON.parse(JSON.stringify(this.value))
+
       if (tier === 1) {
-        this.selectedTraits.tierOne = id
+        newValue.tierOne = id
       } else if (tier === 2) {
-        this.selectedTraits.tierTwo = id
+        newValue.tierTwo = id
       } else if (tier === 3) {
-        this.selectedTraits.tierThree = id
+        newValue.tierThree = id
       }
+
+      this.$emit('input', newValue)
+    },
+    loadSpecialization () {
+      this.$store.dispatch('loadSpecializations', [this.id])
+    },
+  },
+  watch: {
+    id () {
+      this.loadSpecialization()
     },
   },
   components: {
     Trait,
   },
-  props: ['id'],
+  props: ['id', 'value'],
 }
 </script>
 
@@ -75,7 +87,7 @@ export default {
   width: 650px;
   height: 140px;
   position: relative;
-  padding-left: 150px;
+  padding-left: 180px;
   background-color: #111;
 }
 

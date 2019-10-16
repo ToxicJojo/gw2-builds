@@ -12,6 +12,7 @@ import BuffConversion from '@/components/facts/BuffConversion.vue'
 import ComboField from '@/components/facts/ComboField.vue'
 import ComboFinisher from '@/components/facts/ComboFinisher.vue'
 import Damage from '@/components/facts/Damage.vue'
+import Duration from '@/components/facts/Duration.vue'
 import Distance from '@/components/facts/Distance.vue'
 import Number from '@/components/facts/Number.vue'
 import NoData from '@/components/facts/NoData.vue'
@@ -31,6 +32,7 @@ export default {
     ComboField,
     ComboFinisher,
     Damage,
+    Duration,
     Distance,
     Number,
     NoData,

@@ -1,6 +1,6 @@
 <template lang='pug'>
   .combo-field
-    span {{ fact.text }}: {{ fact.distacne }}
+    span {{ fact.text }}: {{ fact.distance }}
 </template>
 
 <script>

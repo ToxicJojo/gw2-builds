@@ -1,6 +1,6 @@
 <template lang='pug'>
   .attribute-adjust
-    span {{ fact.target }}: {{ fact.value}}
+    span {{ fact.text ? fact.text: fact.target }}: {{ fact.value }}
 </template>
 
 <script>

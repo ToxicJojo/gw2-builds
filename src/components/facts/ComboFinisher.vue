@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'Combo Finisher',
+  name: 'ComboFinisher',
   props: ['fact'],
 }
 </script>

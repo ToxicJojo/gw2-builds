@@ -25,6 +25,11 @@ export default {
       return this.$store.state.traits[this.id]
     },
   },
+  watch: {
+    id () {
+      this.$store.dispatch('loadTraits', [this.id])
+    },
+  },
   props: ['id', 'selected'],
   components: {
     ToolTip,

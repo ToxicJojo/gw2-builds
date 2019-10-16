@@ -1,23 +1,31 @@
 <template lang='pug'>
   div.app
-    Trait(:id='214')
-    Specialization(:id='1')
-    Specialization(:id='10')
-    Specialization(:id='23')
+    Skill(id='5516')
+    Skill(id='44612')
+    Skill(id='5534')
+    select(v-model='currentProfession')
+      option(v-for='profession in professions' :value='profession')  {{ profession }}
+
+    BuildEditor(:professionId='currentProfession')
+
 </template>
 
 <script>
-import Trait from '@/components/Trait.vue'
-import Specialization from '@/components/Specialization.vue'
+import BuildEditor from '@/components/BuildEditor.vue'
+import Skill from '@/components/Skill.vue'
+import professions from '@/data/professions.json'
 
 export default {
   name: 'App',
-  async mounted () {
-    this.$store.dispatch('loadProfessions', ['Elementalist'])
+  data () {
+    return {
+      professions,
+      currentProfession: 'Elementalist',
+    }
   },
   components: {
-    Trait,
-    Specialization,
+    BuildEditor,
+    Skill,
   },
 }
 </script>
