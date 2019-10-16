@@ -4,6 +4,12 @@
       span Loading {{ professionId }}
     template(v-else)
       h2 Editor: {{ profession.name }}
+      .skill-row
+        SkillEditor(v-model='build.skills.healSkill' skillType='heal' :skillOptions='availableHealSkills')
+        SkillEditor(v-model='build.skills.utilityOne' skillType='heal' :skillOptions='availableUtilitySkills')
+        SkillEditor(v-model='build.skills.utilityTwo' skillType='heal' :skillOptions='availableUtilitySkills')
+        SkillEditor(v-model='build.skills.utilityThree' skillType='heal' :skillOptions='availableUtilitySkills')
+        SkillEditor(v-model='build.skills.eliteSkill' skillType='heal' :skillOptions='availableEliteSkills')
       SpecializationEditor(v-model='build.specializationOne' :specializationOptions='availableNonEliteSpecializations')
       SpecializationEditor(v-model='build.specializationTwo' :specializationOptions='availableNonEliteSpecializations')
       SpecializationEditor(v-model='build.specializationThree' :specializationOptions='availableSpecializations')
@@ -11,6 +17,7 @@
 
 <script>
 import SpecializationEditor from '@/components/SpecializationEditor.vue'
+import SkillEditor from '@/components/SkillEditor.vue'
 
 export default {
   name: 'BuildEditor',
@@ -18,6 +25,13 @@ export default {
     return {
       isLoadingProfession: false,
       build: {
+        skills: {
+          healSkill: 5516,
+          utilityOne: 0,
+          utilityTwo: 0,
+          utilityThree: 0,
+          eliteSkill: 0,
+        },
         specializationOne: {
           id: null,
           tierOne: 0,
@@ -56,6 +70,18 @@ export default {
     profession () {
       return this.$store.state.professions[this.professionId]
     },
+    availableSkills () {
+      return this.profession.skills.filter((skill) => skill.type === 'Utility' || skill.type === 'Heal' || skill.type === 'Elite').map((skill) => skill.id)
+    },
+    availableHealSkills () {
+      return this.profession.skills.filter((skill) => skill.type === 'Heal').map((skill) => skill.id)
+    },
+    availableUtilitySkills () {
+      return this.profession.skills.filter((skill) => skill.type === 'Utility').map((skill) => skill.id)
+    },
+    availableEliteSkills () {
+      return this.profession.skills.filter((skill) => skill.type === 'Elite').map((skill) => skill.id)
+    },  
     availableNonEliteSpecializations () {
       return this.availableSpecializations.filter((specialization) => {
         return this.$store.state.specializations[specialization].elite === false
@@ -77,10 +103,15 @@ export default {
   props: ['professionId'],
   components: {
     SpecializationEditor,
+    SkillEditor,
   },
 }
 </script>
 
 <style lang='scss' scoped>
+
+.skill-row {
+  display: flex;
+}
 
 </style>
