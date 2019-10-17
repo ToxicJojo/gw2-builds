@@ -1,31 +1,25 @@
 <template lang='pug'>
   div.app
-    Skill(id='5516')
-    Skill(id='44612')
-    Skill(id='5534')
-    select(v-model='currentProfession')
-      option(v-for='profession in professions' :value='profession')  {{ profession }}
-
-    BuildEditor(:professionId='currentProfession')
+    BuildManager
 
 </template>
 
 <script>
-import BuildEditor from '@/components/BuildEditor.vue'
-import Skill from '@/components/Skill.vue'
-import professions from '@/data/professions.json'
+import BuildManager from '@/components/BuildManager.vue'
+import localStorageHelper from '@/util/local-storage-helper'
 
 export default {
   name: 'App',
   data () {
     return {
-      professions,
-      currentProfession: 'Elementalist',
     }
   },
+  beforeMount () {
+    const builds = localStorageHelper.getObject('builds')
+    this.$store.commit('builds/setBuilds', builds)
+  },
   components: {
-    BuildEditor,
-    Skill,
+    BuildManager,
   },
 }
 </script>
@@ -34,6 +28,10 @@ export default {
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
 }
 
 </style>

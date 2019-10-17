@@ -50,10 +50,11 @@ export default {
   z-index: 2;
   background-color: #333;
   position: absolute;
-  bottom: 100%;
+  top: 100%;
   display: flex;
   flex-wrap: wrap;
-  width: 256px;
+  width: 289px;
+  padding: 16px;
 }
 
 </style>
