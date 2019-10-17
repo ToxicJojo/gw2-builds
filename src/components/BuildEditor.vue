@@ -5,14 +5,14 @@
     template(v-else)
       h2 Editor: {{ profession.name }}
       .skill-row
-        SkillEditor(v-model='build.skills.healSkill' skillType='heal' :skillOptions='availableHealSkills')
-        SkillEditor(v-model='build.skills.utilityOne' skillType='heal' :skillOptions='availableUtilitySkills')
-        SkillEditor(v-model='build.skills.utilityTwo' skillType='heal' :skillOptions='availableUtilitySkills')
-        SkillEditor(v-model='build.skills.utilityThree' skillType='heal' :skillOptions='availableUtilitySkills')
-        SkillEditor(v-model='build.skills.eliteSkill' skillType='heal' :skillOptions='availableEliteSkills')
-      SpecializationEditor(v-model='build.specializationOne' :specializationOptions='availableNonEliteSpecializations')
-      SpecializationEditor(v-model='build.specializationTwo' :specializationOptions='availableNonEliteSpecializations')
-      SpecializationEditor(v-model='build.specializationThree' :specializationOptions='availableSpecializations')
+        SkillEditor(v-model='value.build.skills.healSkill' skillType='heal' :skillOptions='availableHealSkills')
+        SkillEditor(v-model='value.build.skills.utilityOne' skillType='heal' :skillOptions='availableUtilitySkills')
+        SkillEditor(v-model='value.build.skills.utilityTwo' skillType='heal' :skillOptions='availableUtilitySkills')
+        SkillEditor(v-model='value.build.skills.utilityThree' skillType='heal' :skillOptions='availableUtilitySkills')
+        SkillEditor(v-model='value.build.skills.eliteSkill' skillType='heal' :skillOptions='availableEliteSkills')
+      SpecializationEditor(v-model='value.build.specializationOne' :specializationOptions='availableNonEliteSpecializations')
+      SpecializationEditor(v-model='value.build.specializationTwo' :specializationOptions='availableNonEliteSpecializations')
+      SpecializationEditor(v-model='value.build.specializationThree' :specializationOptions='availableSpecializations')
 </template>
 
 <script>
@@ -24,33 +24,6 @@ export default {
   data () {
     return {
       isLoadingProfession: false,
-      build: {
-        skills: {
-          healSkill: 0,
-          utilityOne: 0,
-          utilityTwo: 0,
-          utilityThree: 0,
-          eliteSkill: 0,
-        },
-        specializationOne: {
-          id: null,
-          tierOne: 0,
-          tierTwo: 0,
-          tierThree: 0,
-        },
-        specializationTwo: {
-          id: null,
-          tierOne: 0,
-          tierTwo: 0,
-          tierThree: 0,
-        },
-        specializationThree: {
-          id: null,
-          tierOne: 0,
-          tierTwo: 0,
-          tierThree: 0,
-        },
-      },
     }
   },
   beforeMount () {
@@ -70,6 +43,9 @@ export default {
     profession () {
       return this.$store.state.professions[this.professionId]
     },
+    build () {
+      return this.value.build
+    },
     availableSkills () {
       return this.profession.skills.filter((skill) => skill.type === 'Utility' || skill.type === 'Heal' || skill.type === 'Elite').map((skill) => skill.id)
     },
@@ -81,7 +57,7 @@ export default {
     },
     availableEliteSkills () {
       return this.profession.skills.filter((skill) => skill.type === 'Elite').map((skill) => skill.id)
-    },  
+    },
     availableNonEliteSpecializations () {
       return this.availableSpecializations.filter((specialization) => {
         return this.$store.state.specializations[specialization].elite === false
@@ -100,7 +76,7 @@ export default {
       this.loadProfession()
     },
   },
-  props: ['professionId'],
+  props: ['professionId', 'value'],
   components: {
     SpecializationEditor,
     SkillEditor,

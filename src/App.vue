@@ -5,23 +5,21 @@
 </template>
 
 <script>
-import BuildEditor from '@/components/BuildEditor.vue'
 import BuildManager from '@/components/BuildManager.vue'
-import Skill from '@/components/Skill.vue'
-import professions from '@/data/professions.json'
+import localStorageHelper from '@/util/local-storage-helper'
 
 export default {
   name: 'App',
   data () {
     return {
-      professions,
-      currentProfession: 'Elementalist',
     }
   },
+  beforeMount () {
+    const builds = localStorageHelper.getObject('builds')
+    this.$store.commit('builds/setBuilds', builds)
+  },
   components: {
-    BuildEditor,
     BuildManager,
-    Skill,
   },
 }
 </script>
@@ -30,6 +28,10 @@ export default {
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
 }
 
 </style>
