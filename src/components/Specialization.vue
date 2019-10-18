@@ -3,15 +3,15 @@
     template(v-if='specialization')
       .specialization-bg(:style='{ backgroundImage: "url(" + specialization.background + ")" }')
       .specialization-column
-        Trait(:id='specialization.minor_traits[0]' selected='true')
+        Trait(:id='specialization.minor_traits[0]' :selected='true')
       .specialization-column
         Trait(v-for='traitId in tierOneTraits' :id='traitId' :selected='value.tierOne === traitId' @click.native='selectTrait(traitId, 1)')
       .specialization-column
-        Trait(:id='specialization.minor_traits[1]' selected='true')
+        Trait(:id='specialization.minor_traits[1]' :selected='true')
       .specialization-column
         Trait(v-for='traitId in tierTwoTraits' :id='traitId' :selected='value.tierTwo === traitId' @click.native='selectTrait(traitId, 2)')
       .specialization-column
-        Trait(:id='specialization.minor_traits[2]' selected='true')
+        Trait(:id='specialization.minor_traits[2]' :selected='true')
       .specialization-column
         Trait(v-for='traitId in tierThreeTraits' :id='traitId' :selected='value.tierThree === traitId' @click.native='selectTrait(traitId, 3)')
 
@@ -63,8 +63,9 @@ export default {
 
       this.$emit('input', newValue)
     },
-    loadSpecialization () {
-      this.$store.dispatch('loadSpecializations', [this.id])
+    async loadSpecialization () {
+      await this.$store.dispatch('loadSpecializations', [this.id])
+      await this.$store.dispatch('loadTraits', [...this.specialization.major_traits, ...this.specialization.minor_traits])
     },
   },
   watch: {

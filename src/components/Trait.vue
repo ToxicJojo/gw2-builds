@@ -17,20 +17,21 @@ export default {
       showTooltip: false,
     }
   },
-  async beforeMount () {
-    await this.$store.dispatch('loadTraits', [this.id])
-  },
   computed: {
     trait () {
       return this.$store.state.traits[this.id]
     },
   },
-  watch: {
-    id () {
-      this.$store.dispatch('loadTraits', [this.id])
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+    selected: {
+      type: Boolean,
+      default: false,
     },
   },
-  props: ['id', 'selected'],
   components: {
     ToolTip,
   },
