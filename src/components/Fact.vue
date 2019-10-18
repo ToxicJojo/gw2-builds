@@ -17,6 +17,7 @@ import Distance from '@/components/facts/Distance.vue'
 import Number from '@/components/facts/Number.vue'
 import NoData from '@/components/facts/NoData.vue'
 import Percent from '@/components/facts/Percent.vue'
+import PrefixedBuff from '@/components/facts/PrefixedBuff.vue'
 import Radius from '@/components/facts/Radius.vue'
 import Range from '@/components/facts/Range.vue'
 import Time from '@/components/facts/Time.vue'
@@ -37,6 +38,7 @@ export default {
     Number,
     NoData,
     Percent,
+    PrefixedBuff,
     Radius,
     Range,
     Time,
