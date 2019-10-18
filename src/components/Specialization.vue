@@ -1,6 +1,6 @@
 <template lang='pug'>
   .specialization
-    template(v-if='specialization')
+    template(v-if='!isLoadingSpecialization')
       .specialization-bg(:style='{ backgroundImage: "url(" + specialization.background + ")" }')
       .specialization-column
         Trait(:id='specialization.minor_traits[0]' :selected='true')
@@ -24,29 +24,35 @@ export default {
   name: 'Specialization',
   data () {
     return {
-      selectedTraits: {
-        tierOne: 0,
-        tierTwo: 0,
-        tierThree: 0,
-      },
+      isLoadingSpecialization: false,
     }
   },
-  mounted () {
+  created () {
     this.loadSpecialization()
   },
   computed: {
     specialization () {
       return this.$store.state.specializations[this.id]
     },
-    // These might need to be read  from the traits 'tier' attribute if the traits are not always orderd correctly.
+    specializationTraits () {
+      return this.specialization.major_traits.map((trait) => {
+        return this.$store.state.traits[trait]
+      })
+    },
     tierOneTraits () {
-      return this.specialization.major_traits.slice(0, 3)
+      return this.specializationTraits.filter((trait) => {
+        return trait.tier === 1
+      }).map((trait) => trait.id)
     },
     tierTwoTraits () {
-      return this.specialization.major_traits.slice(3, 6)
+      return this.specializationTraits.filter((trait) => {
+        return trait.tier === 2
+      }).map((trait) => trait.id)
     },
     tierThreeTraits () {
-      return this.specialization.major_traits.slice(6, 9)
+      return this.specializationTraits.filter((trait) => {
+        return trait.tier === 3
+      }).map((trait) => trait.id)
     },
   },
   methods: {
@@ -64,8 +70,10 @@ export default {
       this.$emit('input', newValue)
     },
     async loadSpecialization () {
+      this.isLoadingSpecialization = true
       await this.$store.dispatch('loadSpecializations', [this.id])
       await this.$store.dispatch('loadTraits', [...this.specialization.major_traits, ...this.specialization.minor_traits])
+      this.isLoadingSpecialization = false
     },
   },
   watch: {
@@ -76,7 +84,13 @@ export default {
   components: {
     Trait,
   },
-  props: ['id', 'value'],
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+    value: Object,
+  },
 }
 </script>
 
@@ -84,12 +98,11 @@ export default {
 
 .specialization {
   display: flex;
-  padding: 24px;
+  position: relative;
   width: 650px;
   height: 140px;
-  position: relative;
   padding-left: 180px;
-  background-color: #111;
+  background-color: #000;
 }
 
 .specialization-bg {
