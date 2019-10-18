@@ -3,6 +3,8 @@
     template(v-if='trait')
       img(:src='trait.icon' @mouseout='showTooltip = false' @mouseenter='showTooltip = true' :class='{ selected: selected}')
       ToolTip(v-if='showTooltip' :value='trait' :isFloating='true')
+    template(v-else)
+      .trait-empty
 </template>
 
 <script>
@@ -15,22 +17,21 @@ export default {
       showTooltip: false,
     }
   },
-  async beforeMount () {
-    await this.$store.dispatch('loadTraits', [this.id])
-  },
-  methods: {
-  },
   computed: {
     trait () {
       return this.$store.state.traits[this.id]
     },
   },
-  watch: {
-    id () {
-      this.$store.dispatch('loadTraits', [this.id])
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+    selected: {
+      type: Boolean,
+      default: false,
     },
   },
-  props: ['id', 'selected'],
   components: {
     ToolTip,
   },
@@ -40,26 +41,26 @@ export default {
 <style lang='scss' scoped>
 
 .trait {
+  // This needs to be relative so the tooltip is positioned correctly.
   position: relative;
-  width: 38px;
-  height: 38px;
-  margin: 2px;
+  display: flex;
+  margin: 4px;
+  border: 1px black;
+}
+
+.trait-empty {
+  background: #333;
+  width: 32px;
+  height: 32px;
 }
 
 img {
+  width: 32px;
+  height: 32px;
   opacity: .65;
-  padding-right: 6px;
-  padding-bottom: 6px;
-  width: 100%;
-  height: auto;
 
-  &:hover {
+  &:hover, &.selected {
     opacity: 1;
  }
-
- &.selected {
-   opacity: 1;
- }
 }
-
 </style>
