@@ -20,6 +20,7 @@ import Percent from '@/components/facts/Percent.vue'
 import PrefixedBuff from '@/components/facts/PrefixedBuff.vue'
 import Radius from '@/components/facts/Radius.vue'
 import Range from '@/components/facts/Range.vue'
+import StunBreak from '@/components/facts/StunBreak.vue'
 import Time from '@/components/facts/Time.vue'
 import Unblockable from '@/components/facts/Unblockable.vue'
 
@@ -41,6 +42,7 @@ export default {
     PrefixedBuff,
     Radius,
     Range,
+    StunBreak,
     Time,
     Unblockable,
   },
@@ -57,6 +59,5 @@ export default {
 
 img {
   width: 32px;
-  height: 32px;
 }
 </style>
